@@ -36,6 +36,10 @@ h1 {
     font-size: 20px;
 }
 
+.searchBtn:hover {
+    cursor: pointer;
+}
+
 .weather div{
     margin: 10px;
 }
@@ -49,7 +53,7 @@ h1 {
 .weather {
     border: 1px solid black;
     width: 50%;
-    height: 250px;
+    height: 300px;
     margin: 20px;
     border-radius: 5px;
     padding: 20px;
@@ -57,10 +61,16 @@ h1 {
     font-size: 20px;
 }
 
+.weather img{
+    float: left;
+    margin-left: 100px;
+    width: 100px;
+}
+
 .currency {
     border: 1px solid black;
     width: 50%;
-    height: 250px;
+    height: 300px;
     margin: 20px;
     border-radius: 5px;
     padding: 20px;
