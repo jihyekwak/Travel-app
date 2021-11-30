@@ -110,7 +110,7 @@ h3 {
     background: #fff;
     padding: 10px 0 0 15px;
     border: 1px solid darkgray;
-    margin-top: 40px;
+    margin: 30px 3px;
     width: 70px;
     padding: 5px;
 }
@@ -118,6 +118,10 @@ h3 {
 #currency select {
     cursor: pointer;
     width: 200px;
+}
+
+#currency input {
+    font-size: 16px;
 }
 
 #displayClock {

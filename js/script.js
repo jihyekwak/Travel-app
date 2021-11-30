@@ -13,7 +13,7 @@ const temp = document.querySelector(".temp");
 const tempRange = document.querySelector(".tempRange");
 const humidity = document.querySelector(".humidity");
 
-// event listener
+// city search event listener
 searchBtn.addEventListener("click", getWeather);
 
 // weather
@@ -39,18 +39,49 @@ function getWeather() {
     })
 }
 
-// create options in select element from API
+// create options in select element from Currency API
+
+const select = document.querySelectorAll(".select");
 
 fetch(`https://api.frankfurter.app/currencies`)
 .then(response => response.json())
 .then(data => {
-    const select = document.querySelectorAll(".select");
+  const entries = Object.entries(data);
+  for (var i = 0; i < entries.length; i++) {
+    select[0].innerHTML += `<option value=${entries[i][0]}>${entries[i][0]} : ${entries[i][1]}</option>`;
+    select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
+  }
+})
 
-    const entries = Object.entries(data);
-      for (var i = 0; i < entries.length; i++) {
-        select[0].innerHTML += `<option value=${entries[i][0]}>${entries[i][0]} : ${entries[i][1]}</option>`;
-        select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
-      }
+// Currency converter
+const amountInput = document.querySelector("#amountInput");
+const amountOutput = document.querySelector("#amountOutput");
+const convertBtn = document.querySelector(".converter");
+
+convertBtn.addEventListener("click", currencyCheck);
+
+function currencyCheck() {
+  let fromCurrency = select[0].value;
+  let toCurrency = select[1].value;
+  let amount = amountInput.value;
+  if (fromCurrency != toCurrency) {
+    currencyConverter(fromCurrency, toCurrency, amount);
+  } else {
+    alert("Choose another currency");
+  }
+}
+
+// Currency exchange rate API
+function currencyConverter(fromCurrency, toCurrency, amount) {
+  fetch(`https://api.frankfurter.app/latest?amount=${amount}&from=${fromCurrency}&to=${toCurrency}`)
+    .then((response) => response.json())
+    .then((data) => {
+
+      const output = Object.values(data.rates)[0]
+      // console.log(data);
+      // console.log(output);
+      amountOutput.value = Object.values(data.rates)[0];
     })
+}
 
 
