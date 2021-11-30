@@ -13,30 +13,51 @@
     <title>Travel App</title>
 </head>
 <body>
-    <h1>Plan your travel</h1>
-    <div class="search">
-        <h2>Where do you want to go?</h2>
-        <input type="text" placeholder="Enter city name" class="cityInput">
-        <input type="submit" value="Search" class="searchBtn">
-    </div>
-    <div class="container">
-        <div class="weather">
-            <h3 id="cityName">Weather in the City</h3>
-            <img src="http://openweathermap.org/img/wn/01d.png" alt="weather icon" id="weatherIcon">
-            <div class="description">Sunny</div>
-            <div class="temp">Temperature: 80°F</div>
-            <div class="tempRange">Min/Max: 70°F / 85 °F</div>
-            <div class="humidity">Humidity: 70%</div>
-        </div>
-        <div class="currency">
-            <h3>Currency converter</h3>
-            <div class="currency1">
-                <input type="text" value="1USD">
-            </div>
-            <div class="currency2">
-                <input type="text" value="1EUR">
+    <h4>Plan your travel</h4>
+    <div class="main">
+        <div class="top">
+            <div class="search">
+                <h1>Plan your travel. </h1>
+                <p>Where are you going?</p>
+                <input type="text" placeholder="Enter city name" class="cityInput">
+                <input type="submit" value="Search" class="searchBtn">
             </div>
         </div>
+        <div class="container">
+            <div class="column" id="weather">
+                <h3 class="cityName">Weather in the City</h3>
+                <img src="http://openweathermap.org/img/wn/01d.png" alt="weather icon" id="weatherIcon">
+                <div class="description">Sunny</div>
+                <div class="temp">Temperature: 80°F</div>
+                <div class="tempRange">Min/Max: 70°F / 85 °F</div>
+                <div class="humidity">Humidity: 70%</div>
+            </div>
+            <div class="column" id="currency">
+                <h3>Currency converter</h3>
+                <div class="fromCurrency">
+                    <label for="">From:</label>
+                    <input type="text" id="amountInput">
+                    <select name="currency" class="select"></select>
+                </div>
+                <div class="toCurrency">
+                    <label for="">To:</label>
+                    <input type="text" class="amountOutput">
+                    <select name="currency" class="select">
+                    </select>
+                </div>
+            </div>
+            <div class="column" id="displayClock">
+                <h3>Time in the city</h3>
+                <div class="localClock">
+                    <div class="localDate">Dec 3, 2021</div>
+                    <div class="localTime">12:20 PM</div>
+                </div>
+                <div class="currentClock">
+                    <p>Currnet time</p>
+                    <div class="currentDateTime">Dec 3, 2021 / 09:20 am</div>
+                </div>
+            </div>    
+        </div>  
     </div>
 </body>
 </html>

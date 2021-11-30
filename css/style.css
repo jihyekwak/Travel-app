@@ -1,89 +1,131 @@
 body {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    margin: 10px;
+    max-width: 1200px;
+    margin: auto auto;
 }
 
-h1 {
+h4 {
     align-self: stretch;
     margin: 0 0 0 5px;
 }
 
-.search {
+main {
+    width: 100%;
+}
+
+.top {
     background-image: url("/images/maarten-van-den-heuvel-gZXx8lKAb7Y-unsplash.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;
-    height: 400px;
+    height: 350px;
     text-align: center;
     margin: 10px;
     border-radius: 5px;
 }
 
-.search h2{
-    margin: 150px 0 40px 0;
-    font-size: 40PX;
+.search {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 2px;
+    float: right;
+    margin-top: 140px;
+    margin-right: 30px;
+}
+
+.search h1{
+    text-align: left;
+    padding: 10px 0 0 20px;
+}
+
+.search p {
+    text-align: left;
+    padding: 0 0 0 10px;
+    font-size: 20px;
+    margin: 10px;
 }
 
 .search input {
     width: 300px;
-    padding: 10px;
+    padding: 10px 0 10px 15px;
     border: none;
-    background: white;
-    border-radius: 5px;
-    font-size: 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    margin: 5px 10px 15px 15px;
 }
 
-.searchBtn:hover {
+input[type='submit'] {
+    margin: 5px 15px 15px 0;
+    width: 100px;
+    padding: 10px;
+}
+
+input[type='sub;mit']:hover {
     cursor: pointer;
-}
-
-.weather div{
-    margin: 10px;
 }
 
 .container {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     width: 100%;
 }
 
-.weather {
-    border: 1px solid black;
-    width: 50%;
-    height: 300px;
-    margin: 20px;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.weather img{
-    float: left;
-    margin-left: 100px;
-    width: 100px;
-}
-
-.currency {
-    border: 1px solid black;
-    width: 50%;
-    height: 300px;
-    margin: 20px;
-    border-radius: 5px;
-    padding: 20px;
-    text-align: center;
-    font-size: 20px;
-}
-
-.currency input {
+.column {
+    border: 3px solid lightgray;;
+    width: 30%;
+    min-height: 280px;
+    align-items: stretch;
     margin: 10px;
-    padding: 5px;
-    font-size: 15px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+
+#weather div{
+    margin: 10px;
+}
+
+#weather img{
+    width: 80px;
+}
+
+#currency {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 h3 {
-    font-size: 25px;
+    font-size: 23px;
+    margin: 15px 0 20px 0;
+}
+
+#currency input, select {
+    border-radius: 2px;
+    margin: 5px;
+    background: #fff;
+    padding: 10px 0 0 15px;
+    border: 1px solid darkgray;
+    margin-top: 40px;
+    width: 70px;
+    padding: 5px;
+}
+
+#currency select {
+    cursor: pointer;
+    width: 200px;
+}
+
+#displayClock {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.currentClock {
+    font-size: 15px;
 }

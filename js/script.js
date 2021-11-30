@@ -6,7 +6,7 @@ const cityInput = document.querySelector(".cityInput");
 const searchBtn = document.querySelector(".searchBtn");
 
 // DOM weather
-const cityName = document.querySelector("#cityName");
+const cityName = document.querySelectorAll(".cityName");
 const weatherIcon = document.querySelector("#weatherIcon");
 const description = document.querySelector(".description");
 const temp = document.querySelector(".temp");
@@ -30,7 +30,7 @@ function getWeather() {
         let tempMax = data['main']['temp_max'];
         let humidityValue = data['main']['humidity'];
 
-        cityName.innerHTML = `Weather in ${cityNameValue}, ${countryNameValue}`;
+        cityName[0].innerHTML = `Weather in ${cityNameValue}, ${countryNameValue}`;
         weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
         description.innerHTML = descValue;
         temp.innerHTML = `Temperature: ${tempValue}°F`;
@@ -38,3 +38,19 @@ function getWeather() {
         humidity.innerHTML = `Humidity: ${humidityValue}%`;
     })
 }
+
+// create options in select element from API
+
+fetch(`https://api.frankfurter.app/currencies`)
+.then(response => response.json())
+.then(data => {
+    const select = document.querySelectorAll(".select");
+
+    const entries = Object.entries(data);
+      for (var i = 0; i < entries.length; i++) {
+        select[0].innerHTML += `<option value=${entries[i][0]}>${entries[i][0]} : ${entries[i][1]}</option>`;
+        select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
+      }
+    })
+
+
