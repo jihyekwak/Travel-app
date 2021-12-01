@@ -12,7 +12,7 @@ function getCurrentTime() {
   const hour = time.getHours();
   const minute = time.getMinutes();
 
-  $(".currentDateTime").html(`${year}/${month + 1}/${date} ${hour}:${minute}`)
+  $(".currentDateTime").html(`${year}/${month + 1}/${String(date).padStart(2, "0")} ${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`);
 }
 
 getCurrentTime();
@@ -83,8 +83,8 @@ async function getLocalInfo() {
     } 
   }
   // console.log("now city time", cityYear, cityMonth+1, cityDate, cityHour, cityMinute)
-  $(".localDate").html(`${cityYear}/${cityMonth}/${cityDate}`);
-  $(".localTime").html(`${cityHour}:${cityMinute}`);
+  $(".localDate").html(`${cityYear}/${cityMonth}/${String(cityDate).padStart(2, "0")}`);
+  $(".localTime").html(`${String(cityHour).padStart(2, "0")}:${String(cityMinute).padStart(2, "0")}`);
 }
 
 

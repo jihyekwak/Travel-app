@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Ubuntu&display=swap');
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     max-width: 1200px;
     margin: auto auto;
+    font-family: 'Nunito', sans-serif;
 }
 
 h4 {
@@ -78,7 +81,7 @@ input[type='sub;mit']:hover {
     min-height: 280px;
     align-items: stretch;
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 6px;
     padding: 10px;
     text-align: center;
     font-size: 18px;
@@ -92,15 +95,18 @@ input[type='sub;mit']:hover {
     width: 80px;
 }
 
+.description {
+    font-size: 25px;
+}
+
 #currency {
     width: 40%;
     display: flex;
     flex-direction: column;
-    
 }
 
 h3 {
-    font-size: 23px;
+    font-size: 25px;
     margin: 15px 0 20px 0;
 }
 
@@ -108,28 +114,53 @@ h3 {
     border-radius: 2px;
     margin: 5px;
     background: #fff;
-    padding: 10px 0 0 15px;
-    border: 1px solid darkgray;
-    margin: 30px 3px;
-    width: 70px;
     padding: 5px;
+    border: 1px solid darkgray;
+    margin: 20px 3px;
+    width: 80px;
+    height: 30px;
+    font-size: 16px;
 }
 
 #currency select {
     cursor: pointer;
     width: 200px;
+    height: 40px;
 }
 
 #currency input {
+    font-size: 15px;
+}
+
+.converter {
+    border: 1px solid darkgray;
+    background-color: white;
+    width: 80px;
+    height: 35px;
+    padding: auto auto;
+    border-radius: 20px;
     font-size: 16px;
+
 }
 
 #displayClock {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+.localClock {
+    background-color: rgb(128, 128, 128, 0.3);
+    width: 50%;
+    margin: auto auto;
+    border: none;
+    border-radius: 5px;
+}
+
+.localClock div{
+    margin: 15px;
+    font-size: 23px;
 }
 
 .currentClock {
-    font-size: 15px;
+    font-size: 18px;
 }
