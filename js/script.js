@@ -39,7 +39,56 @@ async function getLocalInfo() {
   $(".humidity").html(`Humidity: ${data.main.humidity}%`)
 
   // get time information
+  const now = new Date();
+  let utcYear = now.getUTCFullYear();
+  let utcMonth = now.getUTCMonth() + 1;
+  let utcDate = now.getUTCDate();
+  let utcHour = now.getUTCHours();
+  const utcMinute = now.getUTCMinutes();
+  
+  console.log( "UTC time : ", utcYear, utcMonth+1, utcDate, utcHour, utcMinute);
+  // console.log(data.timezone);
+  const gmtDiff = data.timezone/3600;
+  console.log("GMT : " , gmtDiff);
+
+  let cityYear = utcYear;
+  let cityMonth = utcMonth;
+  let cityDate = utcDate;
+  let cityHour = utcHour + gmtDiff;
+  const cityMinute = utcMinute;
+
+  if (cityHour < 0) {
+    cityHour = cityHour + 24;
+    cityDate = utcDate - 1;
+  } else if (cityHour >= 24) {
+    cityDate = utcDate + 1;
+    cityHour = cityHour -24;
+  } 
+
+  if (utcMonth == 0 || utcMonth == 2 || utcMonth == 4 || utcMonth == 6 || utcMonth == 7 || utcMonth == 9 || utcMonth == 11) {
+    if (cityDate == 0) {
+      cityMonth = utcMonth - 1;
+      cityDate = 30;
+    } else if (cityDate == 31) {
+      cityMonth = utcMonth;
+      cityDate = 1;
+    } 
+  } else {
+    if (cityDate == 0) {
+      cityMonth = utcMonth - 1;
+      cityDate = 31;
+    } else if (cityDate == 32) {
+      cityMonth = utcMonth - 1;
+      cityDate = 1;
+    } 
+  }
+  // console.log("now city time", cityYear, cityMonth+1, cityDate, cityHour, cityMinute)
+  $(".localDate").html(`${cityYear}/${cityMonth}/${cityDate}`);
+  $(".localTime").html(`${cityHour}:${cityMinute}`);
 }
+
+
+
 
 // city search event listener, get local information
 $(".searchBtn").on("click", getLocalInfo);
