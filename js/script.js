@@ -1,14 +1,6 @@
-// DOM search
+// DOM 
 const cityInput = document.querySelector(".cityInput");
-// const searchBtn = document.querySelector(".searchBtn");
-
-// DOM weather
 const cityName = document.querySelectorAll(".cityName");
-// const weatherIcon = document.querySelector("#weatherIcon");
-// const description = document.querySelector(".description");
-// const temp = document.querySelector(".temp");
-// const tempRange = document.querySelector(".tempRange");
-// const humidity = document.querySelector(".humidity");
 
 // getCurrentTime function
 function getCurrentTime() {
@@ -20,8 +12,6 @@ function getCurrentTime() {
   const hour = time.getHours();
   const minute = time.getMinutes();
 
-  // const currentDateTime = document.querySelector(".currentDateTime");
-  // currentDateTime.innerHTML = `${year}/${month + 1}/${date} ${hour}:${minute}`;
   $(".currentDateTime").html(`${year}/${month + 1}/${date} ${hour}:${minute}`)
 }
 
@@ -30,9 +20,7 @@ setInterval(getCurrentTime, 60000);
 
 async function getLocalInfo() {
   // get weather information
-  // API key
   const apiKey = "9c28b1c1d4f3cf2f1d5dcffb4edfd955";
-  // weather api
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`
   const response = await fetch(url);
   const data = await response.json();
@@ -41,11 +29,6 @@ async function getLocalInfo() {
   let countryNameValue = data['sys']['country'];
   let icon = data['weather'][0]['icon'];
   let iconUrl = `http://openweathermap.org/img/wn/${icon}.png`
-  // let descValue = data['weather'][0]['main'];
-  // let tempValue = data['main']['temp'];
-  // let tempMin = data['main']['temp_min'];
-  // let tempMax = data['main']['temp_max'];
-  // let humidityValue = data['main']['humidity'];
 
   cityName[0].innerHTML = `Weather in ${cityNameValue}, ${countryNameValue}`;
   cityName[1].innerHTML = `Time in ${cityNameValue}`;
@@ -55,19 +38,10 @@ async function getLocalInfo() {
   $(".tempRange").html(`Min/Max: ${data.main.temp_min}°F / ${data.main.temp_max}°F`);
   $(".humidity").html(`Humidity: ${data.main.humidity}%`)
 
-
-  // weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
-  // description.innerHTML = descValue;
-  // temp.innerHTML = `Temperature: ${tempValue}°F`;
-  // tempRange.innerHTML = `Min/Max: ${tempMin}°F / ${tempMax}°F`
-  // humidity.innerHTML = `Humidity: ${humidityValue}%`;
-
   // get time information
-
 }
 
 // city search event listener, get local information
-// searchBtn.addEventListener("click", getLocalInfo);
 $(".searchBtn").on("click", getLocalInfo);
 
 // Currency APIs
@@ -106,7 +80,7 @@ function currencyCheck() {
 }
 
 // Currency conver button add event listener
-// convertBtn.addEventListener("click", currencyCheck);
+
 $(".converter").on("click", currencyCheck);
 
 // Currency exchange rate API
@@ -115,8 +89,5 @@ async function currencyConverter(fromCurrency, toCurrency, amount) {
   const response = await fetch(url);
   const data = await response.json();
 
-  // const output = Object.values(data.rates)[0]
-  // console.log(data);
-  // console.log(output);
   amountOutput.value = Object.values(data.rates)[0];
 }
