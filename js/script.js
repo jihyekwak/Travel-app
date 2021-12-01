@@ -1,6 +1,3 @@
-// API key
-const apiKey = "9c28b1c1d4f3cf2f1d5dcffb4edfd955";
-
 // DOM search
 const cityInput = document.querySelector(".cityInput");
 const searchBtn = document.querySelector(".searchBtn");
@@ -13,45 +10,71 @@ const temp = document.querySelector(".temp");
 const tempRange = document.querySelector(".tempRange");
 const humidity = document.querySelector(".humidity");
 
-// city search event listener
-searchBtn.addEventListener("click", getWeather);
+// getCurrentTime function
+function getCurrentTime() {
+  const time = new Date();
+  console.log(time);
+  const year = time.getFullYear();
+  const month = time.getMonth();
+  const date = time.getDate();
+  const hour = time.getHours();
+  const minute = time.getMinutes();
 
-// weather
-function getWeather() {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`)
-    .then(response => response.json())
-    .then(data => {
-        let cityNameValue = data['name'];
-        let countryNameValue = data['sys']['country'];
-        let icon = data['weather'][0]['icon'];
-        let descValue = data['weather'][0]['main'];
-        let tempValue = data['main']['temp'];
-        let tempMin = data['main']['temp_min'];
-        let tempMax = data['main']['temp_max'];
-        let humidityValue = data['main']['humidity'];
-
-        cityName[0].innerHTML = `Weather in ${cityNameValue}, ${countryNameValue}`;
-        weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
-        description.innerHTML = descValue;
-        temp.innerHTML = `Temperature: ${tempValue}°F`;
-        tempRange.innerHTML = `Min/Max: ${tempMin}°F / ${tempMax}°F`
-        humidity.innerHTML = `Humidity: ${humidityValue}%`;
-    })
+  const currentDateTime = document.querySelector(".currentDateTime");
+  currentDateTime.innerHTML = `${year}/${month + 1}/${date} ${hour}:${minute}`;
 }
 
+getCurrentTime();
+setInterval(getCurrentTime, 60000);
+
+
+function getLocalInfo() {
+  // get weather information
+  // API key
+  const apiKey = "9c28b1c1d4f3cf2f1d5dcffb4edfd955";
+  // weather api
+  fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput.value}&units=imperial&appid=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+      let cityNameValue = data['name'];
+      let countryNameValue = data['sys']['country'];
+      let icon = data['weather'][0]['icon'];
+      let descValue = data['weather'][0]['main'];
+      let tempValue = data['main']['temp'];
+      let tempMin = data['main']['temp_min'];
+      let tempMax = data['main']['temp_max'];
+      let humidityValue = data['main']['humidity'];
+
+      cityName[0].innerHTML = `Weather in ${cityNameValue}, ${countryNameValue}`;
+      cityName[1].innerHTML = `Time in ${cityNameValue}`;
+      weatherIcon.src = `http://openweathermap.org/img/wn/${icon}.png`;
+      description.innerHTML = descValue;
+      temp.innerHTML = `Temperature: ${tempValue}°F`;
+      tempRange.innerHTML = `Min/Max: ${tempMin}°F / ${tempMax}°F`
+      humidity.innerHTML = `Humidity: ${humidityValue}%`;
+    })
+
+  // get time information
+
+}
+
+// city search event listener, get local information
+searchBtn.addEventListener("click", getLocalInfo);
+
+// Currency APIs
 // create options in select element from Currency API
 
 const select = document.querySelectorAll(".select");
 
 fetch(`https://api.frankfurter.app/currencies`)
-.then(response => response.json())
-.then(data => {
-  const entries = Object.entries(data);
-  for (var i = 0; i < entries.length; i++) {
-    select[0].innerHTML += `<option value=${entries[i][0]}>${entries[i][0]} : ${entries[i][1]}</option>`;
-    select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
-  }
-})
+  .then(response => response.json())
+  .then(data => {
+    const entries = Object.entries(data);
+    for (var i = 0; i < entries.length; i++) {
+      select[0].innerHTML += `<option value=${entries[i][0]}>${entries[i][0]} : ${entries[i][1]}</option>`;
+      select[1].innerHTML += `<option value="${entries[i][0]}">${entries[i][0]} : ${entries[i][1]}</option>`;
+    }
+  })
 
 // Currency converter
 const amountInput = document.querySelector("#amountInput");
@@ -83,18 +106,3 @@ function currencyConverter(fromCurrency, toCurrency, amount) {
       amountOutput.value = Object.values(data.rates)[0];
     })
 }
-
-// getTime
-function getTime() {
-  const time = new Date();
-  const year = time.getFullYear();
-  const month = time.getMonth();
-  const date = time.getDate();
-  const hour = time.getHours();
-  const minute = time.getMinutes();
-  
-  const currentDateTime = document.querySelector(".currentDateTime");
-  currentDateTime.innerHTML = `${year}/${month+1}/${date} ${hour}:${minute}`;
-}
-getTime();
-setInterval(getTime, 60000);
