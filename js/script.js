@@ -2,21 +2,57 @@
 const cityInput = document.querySelector(".cityInput");
 const cityName = document.querySelectorAll(".cityName");
 
+// Display time before submit city
+const time = new Date();
+// console.log(time);
+const year = time.getFullYear();
+const month = time.getMonth();
+const date = time.getDate();
+const hour = time.getHours();
+const minute = time.getMinutes();
+
+$(".localDate").html(`${year} / ${month + 1} / ${String(date).padStart(2, "0")}`);
+$(".localTime").html(`${String(hour).padStart(2, "0")} : ${String(minute).padStart(2, "0")}`);
+
+// Display current location time 
 // getCurrentTime function
 function getCurrentTime() {
-  const time = new Date();
-  console.log(time);
-  const year = time.getFullYear();
-  const month = time.getMonth();
-  const date = time.getDate();
-  const hour = time.getHours();
-  const minute = time.getMinutes();
-
-  $(".currentDateTime").html(`${year}/${month + 1}/${String(date).padStart(2, "0")} ${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`);
+  $(".currentDateTime").html(`${year} / ${month + 1} / ${String(date).padStart(2, "0")}  ${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`);
 }
 
 getCurrentTime();
 setInterval(getCurrentTime, 60000);
+
+// Display current weather function
+
+function onGeoOk(position){
+  const lat = position.coords.latitude;
+  const lon = position.coords.longitude;
+  console.log("You live ", lat, lon);
+  const apiKey = "9c28b1c1d4f3cf2f1d5dcffb4edfd955";
+  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  
+  fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    
+    let icon = data['weather'][0]['icon'];
+    let iconUrl = `http://openweathermap.org/img/wn/${icon}.png`
+
+    $("#weatherIcon").attr("src", iconUrl);
+    $(".dscription").html(data.weather[0].main);
+    $(".temp").html(`Temperature: ${data.main.temp}°F`);
+    $(".tempRange").html(`Min/Max: ${data.main.temp_min}°F / ${data.main.temp_max}°F`);
+    $(".humidity").html(`Humidity: ${data.main.humidity}%`);
+  });
+}
+
+function onGeoError(){
+  alert("Can't find your location. No weather for you.");
+}
+
+// Display current location weather
+navigator.geolocation.getCurrentPosition(onGeoOk, onGeoError);
 
 async function getLocalInfo() {
   // get weather information
@@ -83,11 +119,9 @@ async function getLocalInfo() {
     } 
   }
   // console.log("now city time", cityYear, cityMonth+1, cityDate, cityHour, cityMinute)
-  $(".localDate").html(`${cityYear}/${cityMonth}/${String(cityDate).padStart(2, "0")}`);
-  $(".localTime").html(`${String(cityHour).padStart(2, "0")}:${String(cityMinute).padStart(2, "0")}`);
+  $(".localDate").html(`${cityYear}/ ${cityMonth}/ ${String(cityDate).padStart(2, "0")}`);
+  $(".localTime").html(`${String(cityHour).padStart(2, "0")} : ${String(cityMinute).padStart(2, "0")}`);
 }
-
-
 
 
 // city search event listener, get local information

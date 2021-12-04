@@ -149,8 +149,7 @@ h3 {
 }
 
 .localClock {
-    background-color: rgb(128, 128, 128, 0.3);
-    width: 50%;
+    background-color: rgb(128, 128, 128, 0.1);
     margin: auto auto;
     border: none;
     border-radius: 5px;
