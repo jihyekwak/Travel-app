@@ -28,7 +28,7 @@ setInterval(getCurrentTime, 60000);
 function onGeoOk(position){
   const lat = position.coords.latitude;
   const lon = position.coords.longitude;
-  console.log("You live ", lat, lon);
+  // console.log("You live ", lat, lon);
   const apiKey = "9c28b1c1d4f3cf2f1d5dcffb4edfd955";
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
   
